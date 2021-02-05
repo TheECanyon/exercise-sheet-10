@@ -1,5 +1,6 @@
 package de.unistuttgart.iste.rss.oo.hamstersimulator.sheet10.homework.exercise2;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -10,6 +11,7 @@ public final class Warehouse {
 	//@ private instance invariant numberOfItems >= 0;
 	//@ private instance invariant numberOfItems <= capacity;
 	
+	private ArrayList<Optional<Item>> inventory;
 	private final int capacity;
 	private int numberOfItems;
 	//TODO: Add data structures for exercises 2a and 2c
@@ -29,11 +31,20 @@ public final class Warehouse {
 		}
 		this.capacity = capacity;
 		numberOfItems = 0;
-		//TODO: Initialize data structures for exercises 2a and 2c
+
+		inventory = new ArrayList<>();
+		for (int i = 0; i < capacity; i++) {
+			inventory.add(Optional.empty());
+		}
 	}
 	
 	public void addItem(final Item item) {
-		//TODO: Exercises 2b and 2d
+		for (int i=0; i < inventory.size(); i++) {
+			if (inventory.get(i).equals(Optional.empty())) {
+				inventory.set(i, Optional.of(item));
+				break;
+			}
+		}
 		numberOfItems++;
 	}
 	
